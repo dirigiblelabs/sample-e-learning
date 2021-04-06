@@ -1,0 +1,5 @@
+{
+	"description": "Answers menu",
+	"extensionPoint": "shell-e-learning-menu",
+	"module": "e-learning/views/Answers/menu/item.js"
+}

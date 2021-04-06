@@ -1,0 +1,5 @@
+{
+	"description": "Exams perspective",
+	"extensionPoint": "launchpad-e-learning-perspective",
+	"module": "e-learning/ui/Exams/extensions/perspective/perspective.js"
+}

@@ -1,0 +1,240 @@
+{
+    "schema": {
+        "structures": [
+            {
+                "name": "CLASSES",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 64,
+                        "nullable": true,
+                        "name": "NAME"
+                    }
+                ]
+            },
+            {
+                "name": "LESSONS",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "ID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "CLASS"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 64,
+                        "nullable": true,
+                        "name": "TITLE"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 16384,
+                        "nullable": true,
+                        "name": "CONTENT"
+                    }
+                ]
+            },
+            {
+                "name": "QUESTIONS",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "ID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "EXAM"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "LESSON"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 64,
+                        "nullable": true,
+                        "name": "TITLE"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 256,
+                        "nullable": true,
+                        "name": "CONTENT"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "QUESTIONTYPE"
+                    }
+                ]
+            },
+            {
+                "name": "QUESTIONTYPES",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "NAME"
+                    }
+                ]
+            },
+            {
+                "name": "ANSWERS",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "ID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "QUESTION"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "USERID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 256,
+                        "nullable": true,
+                        "name": "VALUE"
+                    }
+                ]
+            },
+            {
+                "name": "EXAMS",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "ID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "CLASS"
+                    },
+                    {
+                        "type": "DATE",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "STARTDATE"
+                    },
+                    {
+                        "type": "DATE",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "ENDDATE"
+                    }
+                ]
+            },
+            {
+                "name": "Lessons_Classes",
+                "type": "foreignKey",
+                "table": "LESSONS",
+                "constraintName": "Lessons_Classes",
+                "columns": "CLASS",
+                "referencedTable": "CLASSES",
+                "referencedColumns": "Id"
+            },
+            {
+                "name": "Questions_Exams",
+                "type": "foreignKey",
+                "table": "QUESTIONS",
+                "constraintName": "Questions_Exams",
+                "columns": "EXAM",
+                "referencedTable": "EXAMS",
+                "referencedColumns": "Id"
+            },
+            {
+                "name": "Questions_Lessons",
+                "type": "foreignKey",
+                "table": "QUESTIONS",
+                "constraintName": "Questions_Lessons",
+                "columns": "LESSON",
+                "referencedTable": "LESSONS",
+                "referencedColumns": "Id"
+            },
+            {
+                "name": "Questions_QuestionTypes",
+                "type": "foreignKey",
+                "table": "QUESTIONS",
+                "constraintName": "Questions_QuestionTypes",
+                "columns": "QUESTIONTYPE",
+                "referencedTable": "QUESTIONTYPES",
+                "referencedColumns": "Id"
+            },
+            {
+                "name": "Answers_Questions",
+                "type": "foreignKey",
+                "table": "ANSWERS",
+                "constraintName": "Answers_Questions",
+                "columns": "QUESTION",
+                "referencedTable": "QUESTIONS",
+                "referencedColumns": "Id"
+            },
+            {
+                "name": "Exams_Classes",
+                "type": "foreignKey",
+                "table": "EXAMS",
+                "constraintName": "Exams_Classes",
+                "columns": "CLASS",
+                "referencedTable": "CLASSES",
+                "referencedColumns": "Id"
+            }
+        ]
+    }
+}

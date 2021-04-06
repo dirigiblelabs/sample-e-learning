@@ -1,0 +1,5 @@
+{
+	"description": "Exams tiles",
+	"extensionPoint": "launchpad-e-learning-tiles",
+	"module": "e-learning/ui/Exams/views/Answers/extensions/tile/tile.js"
+}

@@ -1,0 +1,5 @@
+{
+	"description": "Classes tiles",
+	"extensionPoint": "launchpad-e-learning-tiles",
+	"module": "e-learning/ui/Classes/views/Classes/extensions/tile/tile.js"
+}

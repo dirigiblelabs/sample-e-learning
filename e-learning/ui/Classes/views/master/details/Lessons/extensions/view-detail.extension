@@ -1,0 +1,5 @@
+{
+	"description": "Lessons view",
+	"extensionPoint": "launchpad-e-learning-Classes-Classes-view",
+	"module": "e-learning/ui/Classes/views/master/details/Lessons/extensions/view.js"
+}
