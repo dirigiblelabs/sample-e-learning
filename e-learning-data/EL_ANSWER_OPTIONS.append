@@ -1,0 +1,8 @@
+10001|10001|both boundary lines will be dotted|false
+10002|10001|both boundary lines will be solid|false
+10003|10001|they won't be any boundary lines|false
+10004|10001|one boundary line will be solid and one will be dotted|true
+10005|10002|x > 1|false
+10006|10002|x > 6|false
+10007|10002|x < 6|false
+10008|10002|x < -1|true
