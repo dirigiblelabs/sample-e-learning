@@ -1,6 +1,7 @@
 var query = require("db/v4/query");
 var producer = require("messaging/v4/producer");
 var daoApi = require("db/v4/dao");
+var EntityUtils = require("e-learning/data/utils/EntityUtils");
 
 var dao = daoApi.create({
 	table: "EL_ANSWER_OPTIONS",
@@ -22,19 +23,25 @@ var dao = daoApi.create({
 		}, {
 			name: "IsCorrect",
 			column: "ISCORRECT",
-			type: "VARCHAR",
+			type: "BOOLEAN",
 		}]
 });
 
 exports.list = function(settings) {
-	return dao.list(settings);
+	return dao.list(settings).map(function(e) {
+		EntityUtils.setBoolean(e, "IsCorrect");
+		return e;
+	});
 };
 
 exports.get = function(id) {
-	return dao.find(id);
+	var entity = dao.find(id);
+	EntityUtils.setBoolean(entity, "IsCorrect");
+	return entity;
 };
 
 exports.create = function(entity) {
+	EntityUtils.setBoolean(entity, "IsCorrect");
 	var id = dao.insert(entity);
 	triggerEvent("Create", {
 		table: "EL_ANSWER_OPTIONS",
@@ -48,6 +55,7 @@ exports.create = function(entity) {
 };
 
 exports.update = function(entity) {
+	EntityUtils.setBoolean(entity, "IsCorrect");
 	dao.update(entity);
 	triggerEvent("Update", {
 		table: "EL_ANSWER_OPTIONS",

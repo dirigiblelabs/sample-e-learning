@@ -73,7 +73,7 @@
                     },
                     {
                         "type": "VARCHAR",
-                        "length": 64,
+                        "length": 256,
                         "nullable": true,
                         "name": "QUESTION_TITLE"
                     },
@@ -146,6 +146,12 @@
                         "length": 0,
                         "nullable": true,
                         "name": "EXAM"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "ISCORRECT"
                     }
                 ]
             },
@@ -201,12 +207,12 @@
                     },
                     {
                         "type": "VARCHAR",
-                        "length": 20,
+                        "length": 256,
                         "nullable": true,
                         "name": "ANSWER_OPTION_VALUE"
                     },
                     {
-                        "type": "VARCHAR",
+                        "type": "BOOLEAN",
                         "length": 20,
                         "nullable": true,
                         "name": "ISCORRECT"

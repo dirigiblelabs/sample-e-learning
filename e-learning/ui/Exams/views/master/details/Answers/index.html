@@ -25,6 +25,7 @@
 					<th class="text-capitalize">Question</th>
 					<th class="text-capitalize">UserId</th>
 					<th class="text-capitalize">Value</th>
+					<th class="text-capitalize">IsCorrect</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -34,6 +35,7 @@
 					<td>{{questionOptionValue(next.Question)}}</td>
 					<td>{{next.UserId}}</td>
 					<td>{{next.Value}}</td>
+					<td><input type="checkbox" ng-model="next.IsCorrect" disabled></td>
 					<td>
 						<i class="close fa fa-remove" ng-click="openDeleteDialog(next)" style="font-size: 1.4em"></i>
 						<i class="close fa fa-bars" ng-click="openEditDialog(next)" style="margin-right: 0.5em; font-size: 1.4em"></i>
@@ -67,6 +69,10 @@
 						<div class="form-group">
 							<label>Value</label>
 							<input   type="text"  maxlength="20" class="form-control" placeholder="Enter value" ng-model="entity.Value" ng-change="updateCalculatedProperties()">
+						</div>
+						<div class="form-group">
+							<label>IsCorrect</label>
+							<input   type="checkbox" ng-model="entity.IsCorrect" ng-change="updateCalculatedProperties()">
 						</div>
 						<div class="modal-footer">
 							<input type="submit" value="Save" class="btn btn-primary btn-lg" ng-show="actionType === 'new'" ng-click="create()">

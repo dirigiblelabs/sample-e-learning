@@ -174,7 +174,7 @@
                     {
                         "calculatedPropertyExpression": "",
                         "dataAutoIncrement": "false",
-                        "dataLength": "64",
+                        "dataLength": "256",
                         "dataName": "QUESTION_TITLE",
                         "dataNullable": "true",
                         "dataPrimaryKey": "false",
@@ -532,7 +532,7 @@
                     {
                         "calculatedPropertyExpression": "",
                         "dataAutoIncrement": "false",
-                        "dataLength": "20",
+                        "dataLength": "256",
                         "dataName": "ANSWER_OPTION_VALUE",
                         "dataNullable": "true",
                         "dataPrimaryKey": "false",
