@@ -10,12 +10,12 @@
 
 exports.getView = function(relativePath) {
 	return {
-		id: "Answers",
-		name: "Answers",
-		label: "Answers",
+		id: "ExamQuestions",
+		name: "Exam Questions",
+		label: "Exam Questions",
 		order: 100,
 		factory: "frame",
-		// region: "center-bottom",
-		link: relativePath + "services/v4/web/e-learning/ui/Exams/views/Answers/index.html"
+		region: "center-bottom",
+		link: relativePath + "services/v4/web/e-learning/ui/Exams/views/master/details/ExamQuestions/index.html"
 	};
 };

@@ -3,33 +3,29 @@ var producer = require("messaging/v4/producer");
 var daoApi = require("db/v4/dao");
 
 var dao = daoApi.create({
-	table: "QUESTIONS",
+	table: "EL_QUESTIONS",
 	properties: [
 		{
 			name: "Id",
-			column: "ID",
+			column: "QUESTION_ID",
 			type: "INTEGER",
 			id: true,
 			autoIncrement: true,
 		}, {
-			name: "Exam",
-			column: "EXAM",
-			type: "INTEGER",
-		}, {
 			name: "Lesson",
-			column: "LESSON",
+			column: "QUESTION_LESSON",
 			type: "INTEGER",
 		}, {
 			name: "Title",
-			column: "TITLE",
+			column: "QUESTION_TITLE",
 			type: "VARCHAR",
 		}, {
 			name: "Content",
-			column: "CONTENT",
+			column: "QUESTION_CONTENT",
 			type: "VARCHAR",
 		}, {
 			name: "QuestionType",
-			column: "QUESTIONTYPE",
+			column: "QUESTION_QUESTION_TYPE",
 			type: "INTEGER",
 		}]
 });
@@ -45,10 +41,10 @@ exports.get = function(id) {
 exports.create = function(entity) {
 	var id = dao.insert(entity);
 	triggerEvent("Create", {
-		table: "QUESTIONS",
+		table: "EL_QUESTIONS",
 		key: {
 			name: "Id",
-			column: "ID",
+			column: "QUESTION_ID",
 			value: id
 		}
 	});
@@ -58,10 +54,10 @@ exports.create = function(entity) {
 exports.update = function(entity) {
 	dao.update(entity);
 	triggerEvent("Update", {
-		table: "QUESTIONS",
+		table: "EL_QUESTIONS",
 		key: {
 			name: "Id",
-			column: "ID",
+			column: "QUESTION_ID",
 			value: entity.Id
 		}
 	});
@@ -70,10 +66,10 @@ exports.update = function(entity) {
 exports.delete = function(id) {
 	dao.remove(id);
 	triggerEvent("Delete", {
-		table: "QUESTIONS",
+		table: "EL_QUESTIONS",
 		key: {
 			name: "Id",
-			column: "ID",
+			column: "QUESTION_ID",
 			value: id
 		}
 	});
@@ -84,7 +80,7 @@ exports.count = function() {
 };
 
 exports.customDataCount = function() {
-	var resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM QUESTIONS");
+	var resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM EL_QUESTIONS");
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;

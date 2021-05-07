@@ -15,7 +15,8 @@ exports.getView = function(relativePath) {
 		label: "Questions",
 		order: 0,
 		factory: "frame",
-		region: "center-bottom",
-		link: relativePath + "services/v4/web/e-learning/ui/Exams/views/master/details/Questions/index.html"
+		region: "center-top",
+		type: "master",
+		link: relativePath + "services/v4/web/e-learning/ui/Exams/views/master/Questions/master/index.html"
 	};
 };

@@ -1,0 +1,5 @@
+{
+	"description": "AnswerOptions view",
+	"extensionPoint": "launchpad-e-learning-Exams-Questions-view",
+	"module": "e-learning/ui/Exams/views/master/details/AnswerOptions/extensions/view.js"
+}

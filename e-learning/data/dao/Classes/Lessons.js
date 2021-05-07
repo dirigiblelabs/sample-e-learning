@@ -3,25 +3,25 @@ var producer = require("messaging/v4/producer");
 var daoApi = require("db/v4/dao");
 
 var dao = daoApi.create({
-	table: "LESSONS",
+	table: "EL_LESSONS",
 	properties: [
 		{
 			name: "Id",
-			column: "ID",
+			column: "LESSON_ID",
 			type: "INTEGER",
 			id: true,
 			autoIncrement: true,
 		}, {
 			name: "Class",
-			column: "CLASS",
+			column: "LESSON_CLASS",
 			type: "INTEGER",
 		}, {
 			name: "Title",
-			column: "TITLE",
+			column: "LESSON_TITLE",
 			type: "VARCHAR",
 		}, {
 			name: "Content",
-			column: "CONTENT",
+			column: "LESSON_CONTENT",
 			type: "VARCHAR",
 		}]
 });
@@ -37,10 +37,10 @@ exports.get = function(id) {
 exports.create = function(entity) {
 	var id = dao.insert(entity);
 	triggerEvent("Create", {
-		table: "LESSONS",
+		table: "EL_LESSONS",
 		key: {
 			name: "Id",
-			column: "ID",
+			column: "LESSON_ID",
 			value: id
 		}
 	});
@@ -50,10 +50,10 @@ exports.create = function(entity) {
 exports.update = function(entity) {
 	dao.update(entity);
 	triggerEvent("Update", {
-		table: "LESSONS",
+		table: "EL_LESSONS",
 		key: {
 			name: "Id",
-			column: "ID",
+			column: "LESSON_ID",
 			value: entity.Id
 		}
 	});
@@ -62,10 +62,10 @@ exports.update = function(entity) {
 exports.delete = function(id) {
 	dao.remove(id);
 	triggerEvent("Delete", {
-		table: "LESSONS",
+		table: "EL_LESSONS",
 		key: {
 			name: "Id",
-			column: "ID",
+			column: "LESSON_ID",
 			value: id
 		}
 	});
@@ -76,7 +76,7 @@ exports.count = function() {
 };
 
 exports.customDataCount = function() {
-	var resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM LESSONS");
+	var resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM EL_LESSONS");
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;

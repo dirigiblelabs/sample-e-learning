@@ -8,11 +8,14 @@
  * SAP - initial API and implementation
  */
 
-exports.getMenu = function() {
+exports.getView = function(relativePath) {
 	return {
 		id: "Answers",
 		name: "Answers",
-		link: "#",
-		order: 800
+		label: "Answers",
+		order: 100,
+		factory: "frame",
+		region: "center-bottom",
+		link: relativePath + "services/v4/web/e-learning/ui/Exams/views/master/details/Answers/index.html"
 	};
 };

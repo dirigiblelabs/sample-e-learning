@@ -14,7 +14,7 @@
 
 <body ng-controller="PageController">
 	<div class="page-header container">
-		<h1>Manage Questions</h1>
+		<h1>Manage Answers</h1>
 	</div>
 	<div class="container">
 		<button type="button" ng-click="openNewDialog()" class="btn btn-lg btn-outline-primary pull-right table-header-button"><i class="fa fa-plus" aria-hidden="true"></i></button>
@@ -22,18 +22,18 @@
 			<thead>
 				<tr>
 					<th>#</th>
-					<th class="text-capitalize">Lesson</th>
-					<th class="text-capitalize">Title</th>
-					<th class="text-capitalize">QuestionType</th>
+					<th class="text-capitalize">Question</th>
+					<th class="text-capitalize">UserId</th>
+					<th class="text-capitalize">Value</th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="next in data">
 					<td>{{(dataPage - 1) * dataLimit + $index + 1}}</td>
-					<td>{{lessonOptionValue(next.Lesson)}}</td>
-					<td>{{next.Title}}</td>
-					<td>{{questiontypeOptionValue(next.QuestionType)}}</td>
+					<td>{{questionOptionValue(next.Question)}}</td>
+					<td>{{next.UserId}}</td>
+					<td>{{next.Value}}</td>
 					<td>
 						<i class="close fa fa-remove" ng-click="openDeleteDialog(next)" style="font-size: 1.4em"></i>
 						<i class="close fa fa-bars" ng-click="openEditDialog(next)" style="margin-right: 0.5em; font-size: 1.4em"></i>
@@ -57,20 +57,16 @@
 				<div class="modal-body">
 					<form name="entityForm" ng-hide="actionType === 'delete'">
 						<div class="form-group">
-							<label>Lesson</label>
-							<select  class="form-control" ng-options="o.Id as o.Title for o in lessonOptions" ng-model="entity.Lesson" ng-change="updateCalculatedProperties()"></select>
+							<label>Question</label>
+							<select  class="form-control" ng-options="o.Id as o.Title for o in questionOptions" ng-model="entity.Question" ng-change="updateCalculatedProperties()"></select>
 						</div>
 						<div class="form-group">
-							<label>Title</label>
-							<input   type="text"  maxlength="64" class="form-control" placeholder="Enter title" ng-model="entity.Title" ng-change="updateCalculatedProperties()">
+							<label>UserId</label>
+							<input   type="text"  maxlength="20" class="form-control" placeholder="Enter userid" ng-model="entity.UserId" ng-change="updateCalculatedProperties()">
 						</div>
 						<div class="form-group">
-							<label>Content</label>
-							<textarea    maxlength="256" class="form-control" placeholder="Enter content" ng-model="entity.Content" ng-change="updateCalculatedProperties()"></textarea>
-						</div>
-						<div class="form-group">
-							<label>QuestionType</label>
-							<select  class="form-control" ng-options="o.Id as o.Name for o in questiontypeOptions" ng-model="entity.QuestionType" ng-change="updateCalculatedProperties()"></select>
+							<label>Value</label>
+							<input   type="text"  maxlength="20" class="form-control" placeholder="Enter value" ng-model="entity.Value" ng-change="updateCalculatedProperties()">
 						</div>
 						<div class="modal-footer">
 							<input type="submit" value="Save" class="btn btn-primary btn-lg" ng-show="actionType === 'new'" ng-click="create()">
@@ -79,7 +75,7 @@
 						</div>
 					</form>
 					<div ng-show="actionType === 'delete'">
-						You are going to delete <b>Questions</b> with <b>Id = {{entity.Id}}</b>.
+						You are going to delete <b>Answers</b> with <b>Id = {{entity.Id}}</b>.
 					</div>
 				</div>
 				<div class="modal-footer" ng-show="actionType === 'delete'">

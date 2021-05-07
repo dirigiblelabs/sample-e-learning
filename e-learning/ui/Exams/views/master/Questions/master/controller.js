@@ -43,11 +43,11 @@ angular.module('page')
 		onQuestionTypesModified: function(callback) {
 			on('e-learning.Exams.QuestionTypes.modified', callback);
 		},
-		onExamsSelected: function(callback) {
-			on('e-learning.Exams.Exams.selected', callback);
-		},
 		messageEntityModified: function() {
 			message('modified');
+		},
+		messageEntitySelected: function(id) {
+			message('selected', id);
 		}
 	};
 }])
@@ -56,6 +56,10 @@ angular.module('page')
 	var api = '../../../../../../../../../../services/v4/js/e-learning/api/Exams/Questions.js';
 	var lessonOptionsApi = '../../../../../../../../../../services/v4/js/e-learning/api/Classes/Lessons.js';
 	var questiontypeOptionsApi = '../../../../../../../../../../services/v4/js/e-learning/api/Exams/QuestionTypes.js';
+
+	$scope.lessonOptions = [];
+
+	$scope.questiontypeOptions = [];
 
 	$scope.dateOptions = {
 		startingDay: 1
@@ -66,10 +70,6 @@ angular.module('page')
 	$scope.dateFormat = $scope.dateFormats[0];
 	$scope.monthFormat = $scope.monthFormats[1];
 	$scope.weekFormat = $scope.weekFormats[3];
-
-	$scope.lessonOptions = [];
-
-	$scope.questiontypeOptions = [];
 
 	function lessonOptionsLoad() {
 		$http.get(lessonOptionsApi)
@@ -114,12 +114,13 @@ angular.module('page')
 		.success(function(data) {
 			$scope.dataCount = data;
 			$scope.dataPages = Math.ceil($scope.dataCount / $scope.dataLimit);
-			$http.get(api + '?Exam=' + $scope.masterEntityId + '&$offset=' + ((pageNumber - 1) * $scope.dataLimit) + '&$limit=' + $scope.dataLimit)
+			$http.get(api + '?$offset=' + ((pageNumber - 1) * $scope.dataLimit) + '&$limit=' + $scope.dataLimit)
 			.success(function(data) {
 				$scope.data = data;
 			});
 		});
 	};
+	$scope.loadPage($scope.dataPage);
 
 	$scope.openNewDialog = function() {
 		$scope.actionType = 'new';
@@ -146,7 +147,6 @@ angular.module('page')
 
 	$scope.create = function() {
 		if ($scope.entityForm.$valid) {
-			$scope.entity.Exam = $scope.masterEntityId;
 			$http.post(api, JSON.stringify($scope.entity))
 			.success(function(data) {
 				$scope.loadPage($scope.dataPage);
@@ -155,13 +155,11 @@ angular.module('page')
 			}).error(function(data) {
 				alert(JSON.stringify(data));
 			});
-		}	
+		}
 	};
 
 	$scope.update = function() {
 		if ($scope.entityForm.$valid) {
-			$scope.entity.Exam = $scope.masterEntityId;
-
 			$http.put(api + '/' + $scope.entity.Id, JSON.stringify($scope.entity))
 			.success(function(data) {
 				$scope.loadPage($scope.dataPage);
@@ -196,6 +194,7 @@ angular.module('page')
 		}
 		return null;
 	};
+
 	$scope.questiontypeOptionValue = function(optionKey) {
 		for (var i = 0 ; i < $scope.questiontypeOptions.length; i ++) {
 			if ($scope.questiontypeOptions[i].Id === optionKey) {
@@ -209,10 +208,11 @@ angular.module('page')
 	$messageHub.onLessonsModified(lessonOptionsLoad);
 	$messageHub.onQuestionTypesModified(questiontypeOptionsLoad);
 
-	$messageHub.onExamsSelected(function(event) {
-		$scope.masterEntityId = event.data.id;
-		$scope.loadPage($scope.dataPage);
-	});
+	$scope.selectEntity = function(entity) {
+		$scope.selectedEntity = entity;
+		$messageHub.messageEntitySelected({
+			'id': entity.Id		})
+	};
 
 	function toggleEntityModal() {
 		$('#entityModal').modal('toggle');

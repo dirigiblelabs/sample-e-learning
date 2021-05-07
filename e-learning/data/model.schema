@@ -2,7 +2,7 @@
     "schema": {
         "structures": [
             {
-                "name": "CLASSES",
+                "name": "EL_CLASSES",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -11,18 +11,18 @@
                         "primaryKey": true,
                         "identity": true,
                         "nullable": true,
-                        "name": "ID"
+                        "name": "CLASS_ID"
                     },
                     {
                         "type": "VARCHAR",
                         "length": 64,
                         "nullable": true,
-                        "name": "NAME"
+                        "name": "CLASS_NAME"
                     }
                 ]
             },
             {
-                "name": "LESSONS",
+                "name": "EL_LESSONS",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -31,30 +31,30 @@
                         "primaryKey": true,
                         "identity": true,
                         "nullable": true,
-                        "name": "ID"
+                        "name": "LESSON_ID"
                     },
                     {
                         "type": "INTEGER",
                         "length": 0,
                         "nullable": true,
-                        "name": "CLASS"
+                        "name": "LESSON_CLASS"
                     },
                     {
                         "type": "VARCHAR",
                         "length": 64,
                         "nullable": true,
-                        "name": "TITLE"
+                        "name": "LESSON_TITLE"
                     },
                     {
                         "type": "VARCHAR",
                         "length": 16384,
                         "nullable": true,
-                        "name": "CONTENT"
+                        "name": "LESSON_CONTENT"
                     }
                 ]
             },
             {
-                "name": "QUESTIONS",
+                "name": "EL_QUESTIONS",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -63,42 +63,94 @@
                         "primaryKey": true,
                         "identity": true,
                         "nullable": true,
-                        "name": "ID"
+                        "name": "QUESTION_ID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "QUESTION_LESSON"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 64,
+                        "nullable": true,
+                        "name": "QUESTION_TITLE"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 256,
+                        "nullable": true,
+                        "name": "QUESTION_CONTENT"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "QUESTION_QUESTION_TYPE"
+                    }
+                ]
+            },
+            {
+                "name": "EL_QUESTION_TYPES",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "QUESTION_TYPE_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "QUESTION_TYPE_NAME"
+                    }
+                ]
+            },
+            {
+                "name": "EL_ANSWERS",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "ANSWER_ID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "ANSWER_QUESTION"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "ANSWER_USER_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 256,
+                        "nullable": true,
+                        "name": "ANSWER_VALUE"
                     },
                     {
                         "type": "INTEGER",
                         "length": 0,
                         "nullable": true,
                         "name": "EXAM"
-                    },
-                    {
-                        "type": "INTEGER",
-                        "length": 0,
-                        "nullable": true,
-                        "name": "LESSON"
-                    },
-                    {
-                        "type": "VARCHAR",
-                        "length": 64,
-                        "nullable": true,
-                        "name": "TITLE"
-                    },
-                    {
-                        "type": "VARCHAR",
-                        "length": 256,
-                        "nullable": true,
-                        "name": "CONTENT"
-                    },
-                    {
-                        "type": "INTEGER",
-                        "length": 0,
-                        "nullable": true,
-                        "name": "QUESTIONTYPE"
                     }
                 ]
             },
             {
-                "name": "QUESTIONTYPES",
+                "name": "EL_EXAMS",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -107,132 +159,165 @@
                         "primaryKey": true,
                         "identity": true,
                         "nullable": true,
-                        "name": "ID"
-                    },
-                    {
-                        "type": "VARCHAR",
-                        "length": 20,
-                        "nullable": true,
-                        "name": "NAME"
-                    }
-                ]
-            },
-            {
-                "name": "ANSWERS",
-                "type": "TABLE",
-                "columns": [
-                    {
-                        "type": "INTEGER",
-                        "length": 0,
-                        "primaryKey": true,
-                        "identity": true,
-                        "nullable": true,
-                        "name": "ID"
+                        "name": "EXAM_ID"
                     },
                     {
                         "type": "INTEGER",
                         "length": 0,
                         "nullable": true,
-                        "name": "QUESTION"
-                    },
-                    {
-                        "type": "VARCHAR",
-                        "length": 20,
-                        "nullable": true,
-                        "name": "USERID"
-                    },
-                    {
-                        "type": "VARCHAR",
-                        "length": 256,
-                        "nullable": true,
-                        "name": "VALUE"
-                    }
-                ]
-            },
-            {
-                "name": "EXAMS",
-                "type": "TABLE",
-                "columns": [
-                    {
-                        "type": "INTEGER",
-                        "length": 0,
-                        "primaryKey": true,
-                        "identity": true,
-                        "nullable": true,
-                        "name": "ID"
-                    },
-                    {
-                        "type": "INTEGER",
-                        "length": 0,
-                        "nullable": true,
-                        "name": "CLASS"
+                        "name": "EXAM_CLASS"
                     },
                     {
                         "type": "DATE",
                         "length": 20,
                         "nullable": true,
-                        "name": "STARTDATE"
+                        "name": "EXAM_START_DATE"
                     },
                     {
                         "type": "DATE",
                         "length": 20,
                         "nullable": true,
-                        "name": "ENDDATE"
+                        "name": "EXAM_END_DATE"
+                    }
+                ]
+            },
+            {
+                "name": "EL_ANSWER_OPTIONS",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "ANSWER_OPTION_ID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "ANSWER_OPTION_QUESTION"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "ANSWER_OPTION_VALUE"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "ISCORRECT"
+                    }
+                ]
+            },
+            {
+                "name": "EL_EXAM_QUESTIONS",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "EXAM_QUESTION_ID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "EXAM_QUESTION_EXAM"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "EXAM_QUESTION_QUESTION"
                     }
                 ]
             },
             {
                 "name": "Lessons_Classes",
                 "type": "foreignKey",
-                "table": "LESSONS",
+                "table": "EL_LESSONS",
                 "constraintName": "Lessons_Classes",
-                "columns": "CLASS",
-                "referencedTable": "CLASSES",
-                "referencedColumns": "Id"
-            },
-            {
-                "name": "Questions_Exams",
-                "type": "foreignKey",
-                "table": "QUESTIONS",
-                "constraintName": "Questions_Exams",
-                "columns": "EXAM",
-                "referencedTable": "EXAMS",
+                "columns": "LESSON_CLASS",
+                "referencedTable": "EL_CLASSES",
                 "referencedColumns": "Id"
             },
             {
                 "name": "Questions_Lessons",
                 "type": "foreignKey",
-                "table": "QUESTIONS",
+                "table": "EL_QUESTIONS",
                 "constraintName": "Questions_Lessons",
-                "columns": "LESSON",
-                "referencedTable": "LESSONS",
+                "columns": "QUESTION_LESSON",
+                "referencedTable": "EL_LESSONS",
                 "referencedColumns": "Id"
             },
             {
                 "name": "Questions_QuestionTypes",
                 "type": "foreignKey",
-                "table": "QUESTIONS",
+                "table": "EL_QUESTIONS",
                 "constraintName": "Questions_QuestionTypes",
-                "columns": "QUESTIONTYPE",
-                "referencedTable": "QUESTIONTYPES",
+                "columns": "QUESTION_QUESTION_TYPE",
+                "referencedTable": "EL_QUESTION_TYPES",
                 "referencedColumns": "Id"
             },
             {
                 "name": "Answers_Questions",
                 "type": "foreignKey",
-                "table": "ANSWERS",
+                "table": "EL_ANSWERS",
                 "constraintName": "Answers_Questions",
-                "columns": "QUESTION",
-                "referencedTable": "QUESTIONS",
+                "columns": "ANSWER_QUESTION",
+                "referencedTable": "EL_QUESTIONS",
+                "referencedColumns": "Id"
+            },
+            {
+                "name": "Answers_Exams",
+                "type": "foreignKey",
+                "table": "EL_ANSWERS",
+                "constraintName": "Answers_Exams",
+                "columns": "EXAM",
+                "referencedTable": "EL_EXAMS",
                 "referencedColumns": "Id"
             },
             {
                 "name": "Exams_Classes",
                 "type": "foreignKey",
-                "table": "EXAMS",
+                "table": "EL_EXAMS",
                 "constraintName": "Exams_Classes",
-                "columns": "CLASS",
-                "referencedTable": "CLASSES",
+                "columns": "EXAM_CLASS",
+                "referencedTable": "EL_CLASSES",
+                "referencedColumns": "Id"
+            },
+            {
+                "name": "AnswerOptions_Questions",
+                "type": "foreignKey",
+                "table": "EL_ANSWER_OPTIONS",
+                "constraintName": "AnswerOptions_Questions",
+                "columns": "ANSWER_OPTION_QUESTION",
+                "referencedTable": "EL_QUESTIONS",
+                "referencedColumns": "Id"
+            },
+            {
+                "name": "ExamQuestions_Exams",
+                "type": "foreignKey",
+                "table": "EL_EXAM_QUESTIONS",
+                "constraintName": "ExamQuestions_Exams",
+                "columns": "EXAM_QUESTION_EXAM",
+                "referencedTable": "EL_EXAMS",
+                "referencedColumns": "Id"
+            },
+            {
+                "name": "ExamQuestions_Questions",
+                "type": "foreignKey",
+                "table": "EL_EXAM_QUESTIONS",
+                "constraintName": "ExamQuestions_Questions",
+                "columns": "EXAM_QUESTION_QUESTION",
+                "referencedTable": "EL_QUESTIONS",
                 "referencedColumns": "Id"
             }
         ]

@@ -3,26 +3,30 @@ var producer = require("messaging/v4/producer");
 var daoApi = require("db/v4/dao");
 
 var dao = daoApi.create({
-	table: "ANSWERS",
+	table: "EL_ANSWERS",
 	properties: [
 		{
 			name: "Id",
-			column: "ID",
+			column: "ANSWER_ID",
 			type: "INTEGER",
 			id: true,
 			autoIncrement: true,
 		}, {
 			name: "Question",
-			column: "QUESTION",
+			column: "ANSWER_QUESTION",
 			type: "INTEGER",
 		}, {
 			name: "UserId",
-			column: "USERID",
+			column: "ANSWER_USER_ID",
 			type: "VARCHAR",
 		}, {
 			name: "Value",
-			column: "VALUE",
+			column: "ANSWER_VALUE",
 			type: "VARCHAR",
+		}, {
+			name: "Exam",
+			column: "EXAM",
+			type: "INTEGER",
 		}]
 });
 
@@ -37,10 +41,10 @@ exports.get = function(id) {
 exports.create = function(entity) {
 	var id = dao.insert(entity);
 	triggerEvent("Create", {
-		table: "ANSWERS",
+		table: "EL_ANSWERS",
 		key: {
 			name: "Id",
-			column: "ID",
+			column: "ANSWER_ID",
 			value: id
 		}
 	});
@@ -50,10 +54,10 @@ exports.create = function(entity) {
 exports.update = function(entity) {
 	dao.update(entity);
 	triggerEvent("Update", {
-		table: "ANSWERS",
+		table: "EL_ANSWERS",
 		key: {
 			name: "Id",
-			column: "ID",
+			column: "ANSWER_ID",
 			value: entity.Id
 		}
 	});
@@ -62,10 +66,10 @@ exports.update = function(entity) {
 exports.delete = function(id) {
 	dao.remove(id);
 	triggerEvent("Delete", {
-		table: "ANSWERS",
+		table: "EL_ANSWERS",
 		key: {
 			name: "Id",
-			column: "ID",
+			column: "ANSWER_ID",
 			value: id
 		}
 	});
@@ -76,7 +80,7 @@ exports.count = function() {
 };
 
 exports.customDataCount = function() {
-	var resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM ANSWERS");
+	var resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM EL_ANSWERS");
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;

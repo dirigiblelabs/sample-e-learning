@@ -8,17 +8,17 @@
  * SAP - initial API and implementation
  */
 
-var dao = require("e-learning/data/dao/Exams/Answers.js")
+var dao = require("e-learning/data/dao/Exams/Questions.js")
 
 exports.getTile = function(relativePath) {
 	let count = "n/a";
 	try {
 		count = dao.customDataCount();	
 	} catch (e) {
-		console.error("Error occured while involking 'e-learning/data/dao/Exams/Answers.customDataCount()': " + e);
+		console.error("Error occured while involking 'e-learning/data/dao/Exams/Questions.customDataCount()': " + e);
 	}
 	return {
-		name: "Answers",
+		name: "Questions",
 		group: "Exams",
 		icon: "file-o",
 		location: relativePath + "services/v4/web/e-learning/ui/Exams/index.html",
